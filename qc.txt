@@ -1,0 +1,141 @@
+QUALITY CONTROL REPORT
+>>>>>>>>>>>>>>>>>>>>>
+
+MANUAL INPUT
+-----------
+Western Schuylkill County PA 19" for Agnes
+Need to check 16 for Delhi in Chris 1982
+need to get coords for Alvin Cooperative Site Claudette 1979
+Need coords for the Hiki ranger station thing
+Need to associate Boynton Beach, FL with coordinates
+Metairie LA 15.97" from Isiore 2002 is somehow missing in clean.csv
+Need coords for San Gorgonio CA, or county placement
+HAYNESVILLE 6S LA for Matthe 2004 (18", TC max) has no coords
+Where is the Idaho state max for Olivia? [2.20"]
+
+
+where is Flour Bluff 17.02" for Gladys? Missing from sheet
+
+
+Renamings
+---------
+Great Atlantic Hurricane 1944
+Nor'easter of November 1984 --> November TD
+Possible TS 1956 --> October TS
+SE US August 1940 --> August Hurricane 1940
+Florida Hurricane of August 1949 --> August Hurricane
+Possible Tropical Storm of September 1968 --> TD #14
+Eastern TD --> TD #2
+
+Remove at End
+-------------
+Gulf Coast Convective Low 2016
+Tropical Low May 2006
+
+
+
+
+GET FROM GOOGLE DRIVE
+::td11aof1973.xlsx - 6/29 integration
+:::td13aof1973.xlsx - 6/29 integration
+:::carmen1974.xlsx - 6/29 integration
+:::stone1976.xlsx - 6/29 integration
+:::agnes1972.xlsx - 6/29 integration
+:::longislandexpress1938.xlsx - 6/29 integration
+:::aug1940southeasthu.xlsx - 6/29 integration
+:::florence1953.xlsm - 6/29 integration
+:::aug1949flhu.xlsx - 6/29 integration
+:::connie1955.xlsx - 6/29 integration
+:::lee2011.xlsx - 6/29 integration
+:::irene2011.xlsx - 6/29 integration
+:::harvey2017.xlsx - 6/29 integration
+::::isaac2012.xlsx - 6/29 integration
+:::alex2010.xlsx - dl 6/30 - seems same
+:::gordon1994.xlsx - dl 6/30 - seems same
+:::dennis2005.xlsx - 6/30
+:::ernesto2006.xlsx - dl 6/30 - seems same
+:::ernesto2012.xlsx - 6/30
+:::gladys1955.xlsx - 6/30
+:::bill2003.xlsx - 6/30
+:::gustav2008.xlsx - 7/1
+:::isabel2003.xlsx - 7/1
+:::ivan2004.xlsx - 7/1
+:::jeanne2004.xlsx - 7/1
+:::esther1957.xlsx - 7/1
+:::ethel1960.xlsx - 7/1
+:::newton1986.xlsx - 7/1
+:::lili1996.xlsx -7/1
+:::henri1985.xlsx - 7/1
+:::dannny1985.xlsx - 7/1
+:::abby1964.xlsx -7/1
+:::able1952.xlsx -7/1 - 7/6
+:::barry2019.xlsx - 7/1
+:::barry2007.xlsx -7/1
+:::barry1983.xlsx -7/1
+:::arlene1959.xlsx -7/1
+:::bertha2020.xlsx -7/1
+:::arthur2020.xlsx -7/1
+:::allen1980.xlsx - 7/9
+:::allison1989.xlsx (7/16) - 7/18
+florence2018.xlsx
+candy1968.xlsx
+oct1948flhu.xlsx
+hazel1953.xlsx
+grace2003.xlsx
+edouard2008.xlsx (7/16)
+paine1986.xlsx (7/16)
+olivia1982.xlsx (7/16)
+alicia1983.xlsx (7/16)
+allison1995.xlsx (7/16)
+anita1977.xlsx (7/16)
+betsy1965.xlsx (7/16)
+bob1979.xlsx (7/16)
+bonnie1986.xlsx (7/16)
+chris1982.xlsx (7/16)
+florence2018.xlsx (7/16)
+bonnie2010.xlsx (7/17)
+charley2004.xlsx (7/17)
+hazel1954.xlsx (7/17)
+beryl1988.xlsx (7/18)
+beryl2012.xlsx (7/18)
+bonnie2004.xlsx(7/18)
+clara1977.xlsx (7/18)
+claudette1979.xlsm (7/18)
+celia1970.xlsx (7/18)
+daiys1958.xlsx (7/18)
+ernesto2006.xlsx (7/18)
+doria1971.xlsx (7/18)
+humberto2007.xlsx (7/18)
+norbert2014.xlsx (7/18)
+gordon2000.xlsx (7/18)
+fay2020.xlsx (7/18)
+rita2005.xlsx (7/18)
+bertha2002.xlsx (7/18)
+opal1995.xlsx (7/18)
+erika2015.xlsx (7/18)
+fran1996.xlsx (7/18)
+
+Coords Added
+:::hyacinth1972.xlsx (7/16) - 7/17
+:::sep1948flhu.xlsx
+:::unnamedlateaguearlysep1953.xlsx
+:::oct1948flhu.xlsx - 7/7
+:::midsep1953unnamed.xlsx - 7/6
+:::mayjun1934.xlsx - 7/6 - added, but not in HRUDAT
+:::lili1996.xlsx - 6/30
+:::John2006.xlsx - 6/30 - some inversion required
+:::hazel1954 - 6/29
+:::debra1973.xlsx
+:::stone1972.xlsx
+:::td221973.xlsx
+:::subrop31976.xlsx - not done; less valued duplicate of subtrop1976
+::::king1950.xlsx
+::::love1950.xlsx - 7/6 repl
+::::how1951.xlsx
+::::josephine1996.xlsx
+::::alex2004.xlsx
+:::chesapeakepotomac1933.xlsx
+:::earlyoct1953unnamed.xlsx
+:::groundhogdayTS1952.xlsx
+ 
+

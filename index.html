@@ -1,0 +1,161 @@
+<html lang="en">
+<head>
+  <title>TC Rainfall Explorer</title>
+  <meta charset="utf-8"/>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <style>
+  * {
+    font-family:"Arial", sans-serif;
+  }
+  
+  .county {
+    fill: #222;
+  }
+
+  .county-mesh {
+    stroke: #111;
+    stroke-width: 1px;
+    fill: none;
+  }
+
+  .state-mesh {
+    stroke: black;
+    stroke-width: 2px;
+    fill: none;
+  }
+
+  .info-region {
+  	border: 1px solid #ccc;
+  	clear: both;
+  	padding-left:10px;
+    width:1190px;
+  }
+
+  #rainfall-plot {
+    height:250px;
+    width:250px;
+    object-fit: contain;
+  }
+  </style>
+</head>
+<body>
+  <h1 style="color:#333">Harrison's Rapid TC Rainfall Observation Explorer</h1>
+  <p>This page may take a while to load. There's a lot of data! This tool is meant to make QC easy. Not operational. <a href="old.html">Check out the NON-SPREADSHEET STORMS EXPLORER!</a></p>
+  <svg id="map" height="800" width="1200" style="background: #0d0f1c; float: left" ></svg>
+  <img id="rainfall-plot" src="https://www.wpc.ncep.noaa.gov/tropical/rain/alberto1982rain.gif" />
+  <div style="clear:right"></div>
+  <select name="storm" id="storm" size="25"></select>
+  <div class="info-region">
+  	<p id="stats" style="font-weight:bold">Stats</p>
+  	<p id="info">Data</p>
+  </div>
+
+  <script>
+    const svg = d3.select("#map");
+    const width = svg.attr("width");
+    const height = svg.attr("height");
+    const margin = { top: 20, right: 20, bottom: 20, left:20};
+    const mapWidth = width - margin.left - margin.right;
+    const mapHeight = height - margin.top - margin.bottom;
+    const map = svg.append("g").attr("transform","translate("+margin.left+","+margin.top+")");
+
+    function colorScale(pcp) {
+      if (pcp < 0.01) { return "#333"; }
+      else if (pcp < 1) { return "#666"; }
+      else if (pcp < 3) { return "#fea44f"; }
+      else if (pcp < 5) { return "#fe7f00"; }
+      else if (pcp < 7) { return "#fe0000"; }
+      else if (pcp < 10) { return "#8a0000"; }
+      else if (pcp < 15) { return "#8868cc"; }
+      else if (pcp < 20) { return "#104e8a"; }
+      else if (pcp < 25) { return "#88b1ed"; }
+      else if (pcp < 30) { return "#00eded"; }
+      else if (pcp < 35) { return "#00fe00"; }
+      else if (pcp < 40) { return "#008a00"; }
+      else if (pcp < 45) { return "#fefe00"; }
+      else if (pcp < 50) { return "#feadb8"; }
+      else if (pcp < 60) { return "#fe00fe"; }
+      else if (pcp < 70) { return "#8a4726"; }
+      else { return "white"; }
+    }
+
+    const requestData = async function() {
+      const us = await d3.json("geography/counties-10m.json");
+      var counties = topojson.feature(us, us.objects.counties);
+      var countiesMesh = topojson.mesh(us, us.objects.counties)
+      var statesMesh = topojson.mesh(us, us.objects.states);
+      var projection = d3.geoAlbersUsa().fitSize([mapWidth, mapHeight], counties);
+      var path = d3.geoPath().projection(projection);
+
+      let bgLayer = map.append("g").attr("id", "bg")
+      let pointsLayer = map.append("g").attr("id", "points");
+      let geoLayer = map.append("g").attr("id","geography");
+
+      var rainfall = await d3.csv("clean.csv", d3.autoType);
+      rainfall = rainfall.filter(function(d) { return !(d.Lat < 23 && d.Lon > -68) && d.Lon > -165});
+      var frainfall = rainfall.slice();
+      var storms = d3.map(rainfall, d => d.Storm)
+      storms = [...new Set(storms)]
+      storms = storms.sort((a, b) => d3.ascending(a,b));
+
+      const form = d3.select("#storm");
+      storms.forEach( (d, i) => {
+        form.append("option").attr("class","storm").attr("value", d).text(d)
+      });
+      
+      form.on("change", function() {
+        let storm = this.value;
+
+        let imgname = storm.toLowerCase().replace(/\s/g, '')
+        let imglink = `https://www.wpc.ncep.noaa.gov/tropical/rain/${imgname}rain.gif`
+        d3.select("#rainfall-plot").attr("src", imglink);
+
+
+        frainfall = rainfall.filter(function(d) { return d.Storm === storm});
+        frainfall = frainfall.sort((a, b) => d3.ascending(a.Total, b.Total));
+        let totals = d3.map(frainfall, d => d.Total);
+
+        frainfall.forEach( (d, i) => {
+          if (d.Lon === null || d.Lat === null) {
+            d.position = [-999,-999];
+          } else {
+            d.position = projection( [d.Lon, d.Lat] );
+          }
+        });
+
+        
+        d3.select("#stats").text("COUNT: " + totals.length + " /// MAX: " + d3.max(totals))
+        //frainfall = frainfall.slice(0, 500)
+
+        let points = pointsLayer.selectAll("circle.dot").data(frainfall)
+         .join("circle")
+         .attr("class","dot")
+         .attr("r", 3)
+         .attr("fill", d => colorScale(d.Total))
+         .attr("lat", d => d.Lat)
+         .attr("lon", d => d.Lon)
+         .attr("storm", d => d.Storm)
+         .attr("cx", d => d.position[0])
+         .attr("cy", d => d.position[1])
+         .on("mouseover", function(e, d) {
+         	d3.select(this).raise().transition().duration(100)
+         	  .attr("stroke-width", 2).attr("stroke", "white").attr("r", 5);
+         	d3.select("#info").text(d.Station + " " + d.Lat + " " + d.Lon + " " + d.Total)
+         })
+         .on("mouseout", function() {
+         	d3.select(this).transition().duration(100).attr("stroke-width", 0)
+         	  .attr("r", 3);
+         })
+         ;
+      });
+
+      bgLayer.selectAll("path.state").data(counties.features).join("path").attr("class", "county").attr("note", d => d.id).attr("d", path);
+      bgLayer.append("path").datum(countiesMesh).attr("class","county-mesh").attr("d", path);
+      bgLayer.append("path").datum(statesMesh).attr("class","state-mesh").attr("d", path);
+      geoLayer.append("path").datum(statesMesh).attr("class","state-mesh").attr("opacity", 0.5).attr("pointer-events", "none").attr("d", path);
+         
+    }
+    requestData();
+  </script>
+</body>
