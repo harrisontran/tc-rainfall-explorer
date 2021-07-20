@@ -114,6 +114,9 @@ bertha2002.xlsx (7/18)
 opal1995.xlsx (7/18)
 erika2015.xlsx (7/18)
 fran1996.xlsx (7/18)
+doria1971.xlsx (7/19)
+erin1995.xlsx (7/19)
+rita2005.xlsx (7/20)
 
 Coords Added
 :::hyacinth1972.xlsx (7/16) - 7/17
