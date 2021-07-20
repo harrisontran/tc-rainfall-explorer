@@ -117,6 +117,11 @@ fran1996.xlsx (7/18)
 doria1971.xlsx (7/19)
 erin1995.xlsx (7/19)
 rita2005.xlsx (7/20)
+katrina2005.xlsx (7/20)
+gaston2004.xlsx (7/20)
+gert1993.xlsx (7/20)
+gilbert1988.xlsx (7/20)
+gracie1959.xlsx (7/20)
 
 Coords Added
 :::hyacinth1972.xlsx (7/16) - 7/17
